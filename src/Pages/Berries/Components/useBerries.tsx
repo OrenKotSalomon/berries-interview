@@ -23,8 +23,11 @@ export default function useBerries() {
         STORAGE_KEYS.Berries,
         berries
     );
-
+    const selectedBerries = berries[selectedFilter] || [];
+    const [list, setList] = useState(selectedBerries)
+    const [loading, setLoading] = useState(false)
     const getBerries = useCallback(async (): Promise<void> => {
+        setLoading(true)
         try {
             const url = "https://pokeapi.co/api/v2/berry?limit=200";
             const res = await API_CALL.GET(url);
@@ -36,7 +39,7 @@ export default function useBerries() {
         } catch (e) {
             console.error(`[useBerries] [getBerries] ${e}`);
         }
-
+        setLoading(false)
     }, [setBerries, setLocalBerries, berries]);
 
     const buildObject = async (data: IBerry[]): Promise<void> => {
@@ -55,7 +58,6 @@ export default function useBerries() {
                 }
             }
 
-
             setBerries(DBObject);
             setLocalBerries(DBObject);
 
@@ -68,6 +70,8 @@ export default function useBerries() {
     useEffect(() => {
         if (Object.keys(localBerries).length > 0) {
             setBerries(localBerries);
+            const selectedBerries = localBerries[selectedFilter] || [];
+            setList(selectedBerries)
         } else {
             getBerries();
         }
@@ -77,6 +81,8 @@ export default function useBerries() {
         berries,
         getBerries,
         selectedFilter,
-        setSelectedFilter
+        setSelectedFilter,
+        list, setList,
+        loading
     };
 }

@@ -5,11 +5,12 @@ import { IBerryDetail } from "../../../../Interfaces/IBerryDetail";
 
 interface IProps {
     items: IBerryDetail[]
+    setList: (items: IBerryDetail[]) => void
 }
 
-export default function useCardlist({ items }: IProps) {
+export default function useCardlist({ items,setList }: IProps) {
     const [search, setSearch] = useState<string>("");
-    const [list, setList] = useState(items)
+    
     const debouncedSearch = useDebounce(search, 500);
 
 
@@ -33,6 +34,5 @@ export default function useCardlist({ items }: IProps) {
     return {
         handleSearch,
         search,
-        list
     };
 }

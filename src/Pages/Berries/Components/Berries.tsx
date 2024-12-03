@@ -20,11 +20,13 @@ const Berries: FunctionComponent<IProps> = () => {
         berries,
         getBerries,
         selectedFilter,
-        setSelectedFilter
+        setSelectedFilter,
+        list, setList,
+        loading
     } = useBerries()
 
 
-    const selectedBerries = berries[selectedFilter] || []; // Fallback to an empty array
+
 
     return (
         <section className={styles.container}>
@@ -41,9 +43,9 @@ const Berries: FunctionComponent<IProps> = () => {
                     <WidthSeperator width={24} />
                 </>
 
-                <CardList items={selectedBerries} Comp={Card} />
+                {loading ? <p>loading....</p> : <CardList items={list} Comp={Card} setList={setList} />}
 
-            </div>
+                </div>
         </section>
     )
 }

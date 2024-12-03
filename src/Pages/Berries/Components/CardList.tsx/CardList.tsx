@@ -7,14 +7,15 @@ import useCardlist from "./useCardList";
 interface IProps {
     items: IBerryDetail[];
     Comp: FunctionComponent<{ data: IBerryDetail }>;
+    setList: (items: IBerryDetail[]) => void
 }
 
-const CardList: FunctionComponent<IProps> = ({ items, Comp }) => {
+const CardList: FunctionComponent<IProps> = ({ items, Comp, setList }) => {
     const {
         handleSearch,
         search,
-        list
-    } = useCardlist({ items })
+    } = useCardlist({ items, setList })
+
 
 
 
@@ -23,7 +24,7 @@ const CardList: FunctionComponent<IProps> = ({ items, Comp }) => {
         <div className={styles.container}>
             <SearchFilter search={search} handleSearch={handleSearch} />
             <HeightSeperator height={24} />
-            {list.map((item, index) => (
+            {items.map((item, index) => (
                 <Fragment key={index}>
                     <Comp key={index} data={item} />
                     <HeightSeperator height={24} />
