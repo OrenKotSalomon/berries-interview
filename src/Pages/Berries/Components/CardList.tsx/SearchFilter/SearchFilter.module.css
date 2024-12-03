@@ -1,0 +1,14 @@
+.searchContainer {
+    flex: 2;
+    width: 100%;
+    display: flex;
+    justify-content: flex-end;
+}
+
+.inputStyle {
+    padding: 12px;
+    border-radius: 24px;
+    border: 1px solid #ededed;
+    width: 200px;
+    box-shadow: black 0px 0px 2px;
+}

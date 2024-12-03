@@ -1,0 +1,58 @@
+/* list styles */
+
+
+.cardContainer {
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    border: 1px solid #dedede;
+    border-radius: 16px;
+    min-height: 75px;
+    overflow: hidden;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+.textContainer {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    flex: 5;
+    align-items: center;
+    text-transform: capitalize;
+
+}
+
+.imageContainer {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+}
+
+.imageStyles {
+    width: 65px;
+    border: 1px solid #dedede;
+    height: 50px;
+    object-fit: cover;
+    background-repeat: no-repeat;
+    mix-blend-mode: multiply;
+    border-radius: 25px;
+    padding-left: 10px;
+    position: relative;
+    left: -25px;
+}
+
+.flavorContainer {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+    color: #c8c8c8
+}
+
+.flav {
+    background-color: #f0f0f0;
+    padding: 4px 16px 4px 16px;
+    border: 1px solid #c8c8c8;
+    border-radius: 24px;
+    font-size: 14px;
+}
