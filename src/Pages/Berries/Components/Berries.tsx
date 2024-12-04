@@ -18,13 +18,12 @@ interface IProps {
 const Berries: FunctionComponent<IProps> = () => {
     const {
         berries,
-        getBerries,
         selectedFilter,
         setSelectedFilter,
         list, setList,
-        loading
-    } = useBerries()
+        loading, items = []
 
+    } = useBerries()
 
 
 
@@ -43,9 +42,9 @@ const Berries: FunctionComponent<IProps> = () => {
                     <WidthSeperator width={24} />
                 </>
 
-                {loading ? <p>loading....</p> : <CardList items={list} Comp={Card} setList={setList} />}
+                {loading ? <p>loading....</p> : <CardList list={list} items={items} Comp={Card} setList={setList} />}
 
-                </div>
+            </div>
         </section>
     )
 }

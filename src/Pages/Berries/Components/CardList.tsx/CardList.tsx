@@ -6,11 +6,13 @@ import HeightSeperator from "../../../../Shared/Helpers/HeightSeperator";
 import useCardlist from "./useCardList";
 interface IProps {
     items: IBerryDetail[];
+    list: IBerryDetail[];
+
     Comp: FunctionComponent<{ data: IBerryDetail }>;
     setList: (items: IBerryDetail[]) => void
 }
 
-const CardList: FunctionComponent<IProps> = ({ items, Comp, setList }) => {
+const CardList: FunctionComponent<IProps> = ({ items, list, Comp, setList }) => {
     const {
         handleSearch,
         search,
@@ -24,7 +26,7 @@ const CardList: FunctionComponent<IProps> = ({ items, Comp, setList }) => {
         <div className={styles.container}>
             <SearchFilter search={search} handleSearch={handleSearch} />
             <HeightSeperator height={24} />
-            {items.map((item, index) => (
+            {list.map((item, index) => (
                 <Fragment key={index}>
                     <Comp key={index} data={item} />
                     <HeightSeperator height={24} />

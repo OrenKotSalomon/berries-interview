@@ -7,7 +7,7 @@ interface IProps {
     options: (keyof IBerryDBKeys)[];
     berries: IBerryDB;
     setSelectedFilter: (key: keyof IBerryDB) => void
-    selectedFilter: string
+    selectedFilter: keyof IBerryDB
 }
 
 

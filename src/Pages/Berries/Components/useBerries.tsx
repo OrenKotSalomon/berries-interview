@@ -17,30 +17,29 @@ export type FilterType = typeof VALID_FILTERS[1];
 
 
 export default function useBerries() {
-    const [selectedFilter, setSelectedFilter] = useState<keyof IBerryDB>('soft')
+    const [selectedFilter, setSelectedFilter] = useState<keyof IBerryDB>('soft');
     const [berries, setBerries] = useState<IBerryDB>({});
     const [localBerries, setLocalBerries] = useLocalStorage<IBerryDB>(
         STORAGE_KEYS.Berries,
         berries
     );
-    const selectedBerries = berries[selectedFilter] || [];
-    const [list, setList] = useState(selectedBerries)
-    const [loading, setLoading] = useState(false)
+    const [list, setList] = useState<IBerryDetail[]>([]);
+    const [loading, setLoading] = useState(false);
+
     const getBerries = useCallback(async (): Promise<void> => {
-        setLoading(true)
+        setLoading(true);
         try {
             const url = "https://pokeapi.co/api/v2/berry?limit=200";
             const res = await API_CALL.GET(url);
 
             if (res?.results) {
-                await buildObject(res.results)
-
+                await buildObject(res.results);
             }
         } catch (e) {
             console.error(`[useBerries] [getBerries] ${e}`);
         }
-        setLoading(false)
-    }, [setBerries, setLocalBerries, berries]);
+        setLoading(false);
+    }, [setBerries, setLocalBerries]);
 
     const buildObject = async (data: IBerry[]): Promise<void> => {
         try {
@@ -60,29 +59,33 @@ export default function useBerries() {
 
             setBerries(DBObject);
             setLocalBerries(DBObject);
+            setList(DBObject[selectedFilter])
 
         } catch (e) {
             console.error(`[useBerries] [buildObject] ${e}`);
         }
     };
 
-
     useEffect(() => {
         if (Object.keys(localBerries).length > 0) {
             setBerries(localBerries);
-            const selectedBerries = localBerries[selectedFilter] || [];
-            setList(selectedBerries)
+            setList(localBerries[selectedFilter])
         } else {
             getBerries();
         }
-    }, [localBerries, getBerries]);
+    }, [localBerries]);
+
+
+
 
     return {
         berries,
         getBerries,
         selectedFilter,
         setSelectedFilter,
-        list, setList,
-        loading
+        list,
+        setList,
+        loading,
+        items: localBerries[selectedFilter]
     };
 }

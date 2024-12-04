@@ -6,7 +6,7 @@ import FilterOptions from "./FilterOptions/FilterOptions"
 
 interface IProps {
     berries: IBerryDB;
-    selectedFilter: string;
+    selectedFilter: keyof IBerryDB;
     setSelectedFilter: (key: keyof IBerryDB) => void
 }
 

@@ -3,11 +3,7 @@
 import { IBerryDetail } from './IBerryDetail';
 
 export interface IBerryDB {
-    "very-soft"?: IBerryDetail[];
-    "soft"?: IBerryDetail[];
-    "hard"?: IBerryDetail[];
-    "very-hard"?: IBerryDetail[];
-    "super-hard"?: IBerryDetail[];
+    [key: string]: IBerryDetail[];
 }
 export interface IBerryDBKeys {
     "very-soft": keyof IBerryDB

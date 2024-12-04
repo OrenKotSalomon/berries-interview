@@ -2,15 +2,16 @@ import { FunctionComponent } from "react";
 import styles from "./FilterBar.module.css"
 
 import { getColor } from "../../../../../Shared/Helpers/helpers";
+import { IBerryDB } from "../../../../../Interfaces/IBerryDB";
 interface IProps {
-    selectedFilter: string
+    selectedFilter: keyof IBerryDB
 }
 
 const FilterBar: FunctionComponent<IProps> = ({ selectedFilter }) => {
 
 
     // not very proud of this 
-    const getPos = (key: string): string => {
+    const getPos = (key: keyof IBerryDB): string => {
         switch (key) {
             case 'soft':
                 return '24%'

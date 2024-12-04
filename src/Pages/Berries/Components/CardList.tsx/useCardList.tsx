@@ -8,28 +8,31 @@ interface IProps {
     setList: (items: IBerryDetail[]) => void
 }
 
-export default function useCardlist({ items,setList }: IProps) {
+export default function useCardlist({ items, setList }: IProps) {
     const [search, setSearch] = useState<string>("");
-    
+
     const debouncedSearch = useDebounce(search, 500);
 
 
-    useEffect(() => {
 
-        handleFilter()
+
+    const handleFilter = () => {
+        const regex = new RegExp(debouncedSearch, "i");
+        const newItems = items.filter((item) => regex.test(item.name));
+        console.log('newItems',);
+
+        setList([...newItems]);
+    }
+
+
+    useEffect(() => {
+        handleFilter();
     }, [debouncedSearch]);
+
 
     const handleSearch = (text: string) => {
         setSearch(text);
     };
-    const handleFilter = useCallback(() => {
-        const regex = new RegExp(debouncedSearch, 'i');
-        const newItems = items.filter((item) => {
-            return regex.test(item.name);
-        });
-        setList(newItems);
-    }, [debouncedSearch]);
-
 
     return {
         handleSearch,

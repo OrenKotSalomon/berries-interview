@@ -1,6 +1,7 @@
+import { IBerryDB } from "../../Interfaces/IBerryDB"
 import { Colors } from "../API/constants"
 
-const getColor = (key: string): string => {
+const getColor = (key: keyof IBerryDB): string => {
     switch (key) {
         case 'soft':
             return Colors['soft']
